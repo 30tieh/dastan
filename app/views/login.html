@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+ 
+<form ng-submit="send()">
+	<p>{{hello.message}}</p>
+	<p>username: <input type="text" ng-model="user_name"/></p>
+	<p>password: <input type="text" ng-model="pass_word"/></p>
+	<button type="submit">Submit</button>
+</form>
+</div>
+
+<script>
+	angular.module('myApp', [])
+	.controller('myCtrl', function($scope, $http)) {
+		$scope.user_name = "Enter your username";
+		$scope.pass_word = "Enter your password";
+		$scope.hello = {message: "Enter your username and password"};
+		$scope.send = function() {
+			var data = $.param({
+				json: JSON.stringigy({
+					username: $scope.user_name;
+				})
+			});
+			$http.post("http://localhost:9000/signIn", data).success(function(data, status) {
+				$scope.message = data;
+			})
+		}
+	})
+</script>
+
+</body>
+</html>
+
