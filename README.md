@@ -30,3 +30,12 @@ So, every route starts with an @ like `@controllers.Application.index()` which l
 The logger is configured for a better output and contains a rolling file
 appender. The logs are look like 
 `2015-08-17 10:21:17,914 INFO [ForkJoinPool-1-worker-3] application: Class::Method:#Line - Message`.
+
+## Usage
+
+To sign up a user using curl:
+    curl --header "Content-type: application/json" --request POST --data '{"name":"sina", "username":"sina.kashipazha", "password":"123"}' http://localhost:9000/signUp
+    
+To sign in using curl:
+    curl --headecation/json" --request POST --data '{"username":"sina.kashipazha", "password":"123"}' http://localhost:9000/signIn
+
