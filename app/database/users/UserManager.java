@@ -1,7 +1,8 @@
 package database.users;
 
 import database.DBManager;
-import models.entities.User;
+import database.users.hibernate.HibernateQueries;
+import models.entities.users.User;
 import java.util.List;
 
 /**
@@ -15,15 +16,12 @@ public class UserManager {
         DBManager.insert(user);
     }
 
-    public static User getUserByUsername(String username) {
-        String hql = "FROM " + entityName + " U WHERE U.username = " + "'" + username + "'";
-        List<User> users = DBManager.getQueryResult(hql);
-        if (users.size() == 0) {
-            return null;
-        } else if (users.size() > 1) {
-            throw new AssertionError("The username field in Users has to be uniqe");
-        }
-        return users.get(0);
+    public static List<User> getUsersByUsername(String username) {
+        //String hql = "FROM " + entityName + " U WHERE U.username = " + "'" + username + "'";
+        String attribute = "username";
+        String query = HibernateQueries.getSelectFromQuery(attribute, username);
+        List<User> users = DBManager.getQueryResult(query);
+        return users;
     }
 }
 

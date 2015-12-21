@@ -1,10 +1,9 @@
-package models.entities;
+package models.entities.users;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.List;
 
 /**
  * Created by leonard on 17.08.15.

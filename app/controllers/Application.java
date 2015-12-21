@@ -1,9 +1,9 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import database.DBManager;
-import database.users.UserManager;
-import models.entities.User;
+import models.entities.users.User;
+import models.entities.users.registeration.Registration;
+import models.entities.users.registeration.RegistrationException;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
@@ -16,6 +16,7 @@ public class Application extends Controller {
 
     public Result signUp() {
         JsonNode json = request().body().asJson();
+        User signedUpUser = null;
         if (json == null) {
             return badRequest("expecting Json data");
         } else {
@@ -25,8 +26,11 @@ public class Application extends Controller {
             if (name == null || username == null || password == null) {
                 return badRequest("Missing parameters");
             } else {
-                User user = new User(name, username, password);
-                DBManager.insert(user);
+                try {
+                    signedUpUser = Registration.signUp(name, username, password);
+                } catch (RegistrationException e) {
+                    e.printStackTrace();
+                }
                 return ok("Signed up successfully");
             }
         }
@@ -34,6 +38,7 @@ public class Application extends Controller {
 
     public Result signIn() {
         JsonNode json = request().body().asJson();
+        User signedInUser = null;
         if (json == null) {
             return badRequest("expecting Json data");
         } else {
@@ -42,15 +47,10 @@ public class Application extends Controller {
             if (username == null || password == null) {
                 return badRequest("Missing parameters");
             } else {
-                User user = UserManager.getUserByUsername(username);
-                if (user == null) {
-                    return ok("You haven't signed up yet");
-                } else if (user.getPassword().equals(password)) {
-                    System.out.println("######### saved password: " + user.getPassword());
-                    System.out.println("######### provided      : " + password);
-                    return ok("Signed in successfully");
-                } else {
-                    return ok("Password is incorrect");
+                try {
+                    signedInUser = Registration.signIn(username, password);
+                } catch (RegistrationException e) {
+                    e.printStackTrace();
                 }
             }
         }

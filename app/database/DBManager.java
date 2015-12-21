@@ -25,8 +25,8 @@ public class DBManager
         }
     }
 
-    public static List getQueryResult(String hql) {
-        Query query = session.createQuery(hql);
+    public static List getQueryResult(String queryString) {
+        Query query = session.createQuery(queryString);
         List results = query.list();
         return results;
     }
