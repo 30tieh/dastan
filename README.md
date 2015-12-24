@@ -37,5 +37,5 @@ To sign up a user using curl:
     curl --header "Content-type: application/json" --request POST --data '{"name":"sina", "username":"sina.kashipazha", "password":"123"}' http://localhost:9000/signUp
     
 To sign in using curl:
-    curl --headecation/json" --request POST --data '{"username":"sina.kashipazha", "password":"123"}' http://localhost:9000/signIn
+        curl --header "Content-type: application/json" --request POST --data '{"username":"sina.kashipazha", "password":"123"}' http://localhost:9000/signIn
 

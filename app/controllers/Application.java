@@ -54,5 +54,6 @@ public class Application extends Controller {
                 }
             }
         }
+        return ok("Signed in successfully");
     }
 }

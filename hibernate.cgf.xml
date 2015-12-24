@@ -25,6 +25,6 @@
         <property name="hbm2ddl.auto">
             create
         </property>
-        <mapping class="models.entities.User"></mapping>
+        <mapping class="models.entities.users.User"></mapping>
     </session-factory>
 </hibernate-configuration>

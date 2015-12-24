@@ -11,6 +11,7 @@ public class BasicPasswordEncryptor implements PasswordEncryptor {
 
     public BasicPasswordEncryptor() {
         textEncryptor = new BasicTextEncryptor();
+        textEncryptor.setPassword("madar e har ki hack kone");
     }
 
 
